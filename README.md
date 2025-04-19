@@ -1,4 +1,4 @@
-# ESP32-CAM WiFi Streaming
+# ESP32-CAM WiFi Streaming On Any Network
 
 A flexible ESP32-CAM project that streams video over WiFi with a clean web interface. Automatically switches between WiFi client and setup mode as needed.
 
