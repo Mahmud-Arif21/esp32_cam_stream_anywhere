@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mini‑Cam Video Stream</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Mini‑Cam Video Stream</h1>
+    <div class="video-container">
+      <img id="videoStream" src="/stream" alt="Live Stream">
+    </div>
+    <div class="controls">
+      <button id="flashBtn" class="btn">Toggle Flash</button>
+      <button id="disconnectBtn" class="btn btn-danger">Disconnect</button>
+    </div>
+    <div id="status"></div>
+  </div>
+  <script>
+    document.getElementById('flashBtn').onclick = () => fetch('/flash');
+    document.getElementById('disconnectBtn').onclick = () => {
+      if (!confirm('Disconnect WiFi and restart in AP mode?')) return;
+      const status = document.getElementById('status');
+      status.textContent = 'Disconnecting…';
+      status.style.color = 'orange';
+      fetch('/disconnect')
+        .finally(() => setTimeout(() => {
+          status.textContent = 'Disconnected. AP mode active.';
+        }, 2000));
+    };
+  </script>
+</body>
+</html>
