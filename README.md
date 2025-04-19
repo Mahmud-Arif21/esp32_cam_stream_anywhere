@@ -11,7 +11,7 @@ A flexible ESP32-CAM project that streams video over WiFi with a clean web inter
 
 ## Hardware Requirements
 
-- ESP32-CAM module (AI Thinker model recommended)
+- ESP32-CAM module (AI Thinker model is used here)
 - USB-to-Serial adapter (for programming)
 - 5V power supply
 
@@ -22,8 +22,10 @@ A flexible ESP32-CAM project that streams video over WiFi with a clean web inter
 - Install [Arduino IDE](https://www.arduino.cc/en/software)
 - Add ESP32 board support via Boards Manager ([guide](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/))
 - Install required libraries:
-  - ESP32 Arduino Core
-  - SPIFFS filesystem
+  - ESPAsyncWebServer
+  - AsyncTCP
+  - img_converters
+  - SPIFFS
 
 ### 2. Connection for Programming
 
@@ -43,16 +45,15 @@ The project consists of two main parts that need to be uploaded separately:
 
 ### Part 1: Filesystem Initialization
 
-This component prepares the ESP32-CAM's internal storage for web files.
+This component prepares the ESP32-CAM's internal storage for static files (html, css) for the web interface.
 
 #### Upload Process
 
 1. Open `filesystem_init/SPIFFS_upload/SPIFFS_upload.ino` in Arduino IDE
-2. Select board: "AI Thinker ESP32-CAM" or "ESP32 Wrover Module"
+2. Select board: "AI Thinker ESP32-CAM"
 3. Set upload speed: 115200
 4. Upload the sketch
 5. Open Serial Monitor at 115200 baud to verify successful SPIFFS mounting
-6. Use "Tools → ESP32 Sketch Data Upload" to upload web files from the `data` folder
 
 #### Customization
 
@@ -70,7 +71,7 @@ This is the main application that handles the camera, WiFi connection, and web s
 1. Open `esp32_cam_server/esp32_cam_server.ino` in Arduino IDE
 2. Verify all header files are in the same folder
 3. Upload the sketch
-4. Remove IO0-GND connection and reset the device
+4. Reset the device
 5. Check Serial Monitor at 115200 baud for IP address information
 
 #### Customization
@@ -96,7 +97,7 @@ The ESP32-CAM operates in two modes:
 1. **WiFi Client Mode** (Normal Operation):
    - The device connects to your WiFi network using stored credentials
    - Video streaming is available in this mode
-   - Flash control and other features are accessible
+   - Flash LED control, network disconnect and other features are accessible
 
 2. **Setup Access Point Mode** (Configuration Only):
    - Activates only when no stored WiFi credentials exist or connection fails
@@ -116,9 +117,9 @@ The ESP32-CAM operates in two modes:
 ### Normal Operation
 
 1. The ESP32-CAM will connect to your configured WiFi network
-2. Find the device's IP address (check your router or serial monitor)
+2. Find the device's IP address (check serial monitor)
 3. Navigate to this IP address in a web browser
-4. View the live stream and control the flash
+4. View the live stream and control the flash or disconnect from current network if necessary
 
 ## Project Structure
 
