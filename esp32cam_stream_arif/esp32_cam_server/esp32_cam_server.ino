@@ -54,11 +54,11 @@ void setup() {
   // Initialize with high specs to pre-allocate larger buffers
   if (psramFound()) {
     config.frame_size = FRAMESIZE_VGA;
-    config.jpeg_quality = 10;  // 0-63 lower means higher quality
-    config.fb_count = 2;
+    config.jpeg_quality = 15;  // 0-63 lower means higher quality
+    config.fb_count = 3;
   } else {
     config.frame_size = FRAMESIZE_SVGA;
-    config.jpeg_quality = 12;
+    config.jpeg_quality = 20;
     config.fb_count = 1;
   }
   
