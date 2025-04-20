@@ -26,6 +26,6 @@
 #define FRAMESIZE_DEFAULT FRAMESIZE_VGA  // 640x480
 
 // JPEG quality
-#define JPEG_QUALITY_DEFAULT 10  // 0-63 lower means higher quality
+#define JPEG_QUALITY_DEFAULT 15  // 0-63 lower means higher quality
 
 #endif // CAMERA_CONFIG_H
