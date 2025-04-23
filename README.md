@@ -41,7 +41,7 @@ A flexible ESP32-CAM project that streams video over WiFi with a clean web inter
 
 *Logic-level note:* The UNO’s TX/RX operate at 5 V while the ESP32‑CAM uses 3.3 V UART, but from the experience of most users, we can flash successfully without level shifting when powering the module at 5 V.
 
-![mini-cam server](Images\esp32_cam_arduino.png)
+![mini-cam server](Images/esp32_cam_arduino.png)
 
 
 | ESP32‑CAM Pin    | Arduino UNO (Programmer)              |
@@ -61,7 +61,7 @@ A flexible ESP32-CAM project that streams video over WiFi with a clean web inter
 
 Set the VCC jumper to 5 V, then wire as follows:
 
-![mini-cam server](Images\esp32_cam_FTDI.png)
+![mini-cam server](Images/esp32_cam_FTDI.png)
 
 | ESP32‑CAM Pin    | FTDI FT232RL Module                      |
 |------------------|-------------------------------------------|
@@ -79,7 +79,7 @@ Set the VCC jumper to 5 V, then wire as follows:
 
 The shield plugs directly onto the ESP32‑CAM and provides built‑in USB conversion (CH340C) plus BOOT and RESET buttons.
 
-![mini-cam server](Images\esp32_cam_mb_driver.png)
+![mini-cam server](Images/esp32_cam_mb_driver.png)
 
 | ESP32‑CAM Pin    | ESP32‑CAM‑MB Programmer Shield           |
 |------------------|-------------------------------------------|
@@ -165,15 +165,15 @@ The ESP32-CAM operates in two modes:
 1. Power on the ESP32-CAM module
 
 2. The device will create a **`mini-cam`** WiFi network **(no password)**
-![mini-cam server](Images\AP_Mode_Serial_Monitor.png)
+![mini-cam server](Images/AP_Mode_Serial_Monitor.png)
 
 3. Connect to this network from your phone or computer
-![mini-cam server](Images\AP_Mode_Server.png)
+![mini-cam server](Images/AP_Mode_Server.png)
 
 4. Open a web browser and navigate to `192.168.4.1`
 
 5. Enter your WiFi network credentials and connect
-![mini-cam server](Images\AP_Mode_UI.png)
+![mini-cam server](Images/AP_Mode_UI.png)
 
 6. The device will restart and connect to your WiFi network
 
@@ -182,13 +182,13 @@ The ESP32-CAM operates in two modes:
 1. The ESP32-CAM will connect to your configured WiFi network
 
 2. Find the device's IP address (check serial monitor)
-![mini-cam server](Images\STA_Mode_Serial_Monitor.png)
+![mini-cam server](Images/STA_Mode_Serial_Monitor.png)
 
 3. Navigate to this IP address in a web browser
-![mini-cam server](Images\STA_Mode_UI.png)
+![mini-cam server](Images/STA_Mode_UI.png)
 
 4. View the live stream and control the **flash** or **disconnect** from current network if necessary
-![mini-cam server](Images\STA_Mode_UI_Flash_On.png)
+![mini-cam server](Images/STA_Mode_UI_Flash_On.png)
 
 ## Project Structure
 
