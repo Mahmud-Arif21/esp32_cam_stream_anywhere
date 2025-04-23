@@ -29,15 +29,68 @@ A flexible ESP32-CAM project that streams video over WiFi with a clean web inter
 
 ### 2. Connection for Programming
 
-| ESP32-CAM | USB-to-Serial Adapter |
-|-----------|----------------------|
-| 5V        | 5V                   |
-| GND       | GND                  |
-| U0R       | TX                   |
-| U0T       | RX                   |
-| IO0       | GND (only during upload) |
+> ⚠️ **Note:**  
+> In my setup, I used the **ESP32-CAM-MB module** (USB programmer base for the ESP32-CAM), which provides the **most convenient and reliable method** for uploading firmware.  
+> This module includes a built-in USB-to-Serial converter and handles auto-reset and boot mode selection **automatically**, so there's **no need for manual wiring or pressing buttons** during upload.  
+>  
+> If you don't have the ESP32-CAM-MB, the following sections describe **alternative programming methods** using an Arduino UNO or an FTDI module.
 
-> **Important**: Connect IO0 to GND only when uploading firmware. Remove this connection for normal operation.
+#### 2.1 Using an Arduino UNO as USB-to-Serial Programmer
+
+*Logic-level note:* The UNO’s TX/RX operate at 5 V while the ESP32‑CAM uses 3.3 V UART, but from the experience of most users, we can flash successfully without level shifting when powering the module at 5 V.
+
+![mini-cam server](Images\esp32_cam_arduino.png)
+
+
+| ESP32‑CAM Pin    | Arduino UNO (Programmer)              |
+|------------------|---------------------------------------|
+| **5 V**          | 5 V (UNO 5 V pin)                     |
+| **GND**          | GND                                   |
+| **U0R (RX)**     | TX (Digital Pin 1)                    |
+| **U0T (TX)**     | RX (Digital Pin 0)                    |
+| **IO0 (BOOT)**   | GND (only during firmware upload)     |
+| **RESET (UNO)**  | GND (to disable UNO MCU during upload)|
+
+> **Note:** Tie RESET and IO0 to GND only while pressing Upload in the IDE; remove both after “Done uploading.”
+
+---
+
+#### 2.2 Using an FTDI FT232RL Module
+
+Set the VCC jumper to 5 V, then wire as follows:
+
+![mini-cam server](Images\esp32_cam_FTDI.png)
+
+| ESP32‑CAM Pin    | FTDI FT232RL Module                      |
+|------------------|-------------------------------------------|
+| **5 V**          | VCC (set jumper to 5 V) → 5 V             |
+| **GND**          | GND                                       |
+| **U0R (RX)**     | TX                                        |
+| **U0T (TX)**     | RX                                        |
+| **IO0 (BOOT)**   | GND (only during firmware upload)         |
+
+> **Tip:** Press IO0 to GND then press Reset when you see the IDE’s “Connecting…” dots.
+
+---
+
+#### 2.3 Using the ESP32‑CAM‑MB USB Adapter Shield
+
+The shield plugs directly onto the ESP32‑CAM and provides built‑in USB conversion (CH340C) plus BOOT and RESET buttons.
+
+![mini-cam server](Images\esp32_cam_mb_driver.png)
+
+| ESP32‑CAM Pin    | ESP32‑CAM‑MB Programmer Shield           |
+|------------------|-------------------------------------------|
+| **5 V**          | 5 V (powered via Micro‑USB on shield)     |
+| **GND**          | GND (common ground on shield)             |
+| **U0R (RX)**     | CH340C TX (internally routed to USB)      |
+| **U0T (TX)**     | CH340C RX (internally routed to USB)      |
+| **IO0 (BOOT)**   | BOOT button (hold during upload)          |
+| **RST (RESET)**  | ESP32‑CAM on‑board RST button             |
+
+> **Reminder:** Release BOOT after upload and use the on‑board RST button if the shield’s RESET doesn’t trigger the module correctly.
+
+
 
 ## Project Components
 
@@ -101,25 +154,39 @@ The ESP32-CAM operates in two modes:
 
 2. **Setup Access Point Mode** (Configuration Only):
    - Activates only when no stored WiFi credentials exist or connection fails
-   - Creates a "mini-cam" access point for configuration purposes
+   - Creates a **`mini-cam`** access point for configuration purposes
    - No video streaming is available in this mode
    - Only used to input WiFi credentials
 
 ### First-time Setup
 
-1. Power on the ESP32-CAM
-2. The device will create a "mini-cam" WiFi network (no password)
+1. Power on the ESP32-CAM module
+
+2. The device will create a **`mini-cam`** WiFi network **(no password)**
+![mini-cam server](Images\AP_Mode_Serial_Monitor.png)
+
 3. Connect to this network from your phone or computer
+![mini-cam server](Images\AP_Mode_Server.png)
+
 4. Open a web browser and navigate to `192.168.4.1`
+
 5. Enter your WiFi network credentials and connect
+![mini-cam server](Images\AP_Mode_UI.png)
+
 6. The device will restart and connect to your WiFi network
 
 ### Normal Operation
 
 1. The ESP32-CAM will connect to your configured WiFi network
+
 2. Find the device's IP address (check serial monitor)
+![mini-cam server](Images\STA_Mode_Serial_Monitor.png)
+
 3. Navigate to this IP address in a web browser
-4. View the live stream and control the flash or disconnect from current network if necessary
+![mini-cam server](Images\STA_Mode_UI.png)
+
+4. View the live stream and control the **flash** or **disconnect** from current network if necessary
+![mini-cam server](Images\STA_Mode_UI_Flash_On.png)
 
 ## Project Structure
 
