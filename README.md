@@ -29,10 +29,12 @@ A flexible ESP32-CAM project that streams video over WiFi with a clean web inter
 
 ### 2. Connection for Programming
 
-> ⚠️ **Note:**  
-> In my setup, I used the **ESP32-CAM-MB module** (USB programmer base for the ESP32-CAM), which provides the **most convenient and reliable method** for uploading firmware.  
+> ⚠️ **Note:**
+
+> In my setup, I used the **ESP32-CAM-MB module** (USB programmer base for the ESP32-CAM), which provides the **most convenient and reliable method** for uploading firmware.
+
 > This module includes a built-in USB-to-Serial converter and handles auto-reset and boot mode selection **automatically**, so there's **no need for manual wiring or pressing buttons** during upload.  
->  
+
 > If you don't have the ESP32-CAM-MB, the following sections describe **alternative programming methods** using an Arduino UNO or an FTDI module.
 
 #### 2.1 Using an Arduino UNO as USB-to-Serial Programmer
