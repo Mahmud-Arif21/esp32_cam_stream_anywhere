@@ -212,7 +212,7 @@ esp32cam_stream
 
 ## Troubleshooting
 
-- **Cannot upload code**: Ensure IO0 is connected to GND during upload
+- **Cannot upload code**: Ensure IO0 is connected to GND during upload (IO0 button pressed)
 - **No WiFi AP appears**: Check power supply; ESP32-CAM needs stable 5V
 - **Camera fails to initialize**: Verify camera module connections
 - **Stream is slow**: Lower resolution in `camera_config.h`
